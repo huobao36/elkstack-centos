@@ -2,8 +2,8 @@
 
 if [ $# -lt 1 ]
 then
-  echo "Usage: $0 <inventory> <playbook (without .yml)> [debug]"
-  echo "Use \"site\" for playbook name"
+  echo "Usage: $0 <playbook (without .yml)> [debug]"
+  echo "Example sh runansible.sh site debug"
   exit 1
 fi
 
@@ -11,7 +11,7 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 
 DEBUG=""
 
-if [ "debug" = "$3" ]
+if [ "debug" = "$2" ]
 then
   DEBUG="-C"
 fi
