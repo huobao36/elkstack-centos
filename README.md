@@ -21,3 +21,32 @@ Run runansible.sh
 ```
 
 Tested with CentOS 6.4
+
+### Shibboleth IdP v3 logging configuration
+
+Add these blocks to $IDP_HOME/conf/logback.conf
+```
+<!-- Syslog appender -->
+	<appender name="IDP_SYSLOG" class="ch.qos.logback.classic.net.SyslogAppender">
+	   <SyslogHost>SERVER_NAME/IP-ADDRESS</SyslogHost>
+	   <Port>5000</Port>
+	   <Facility>AUDIT</Facility>
+	   <SuffixPattern>[%logger:%line] %msg|%mdc{idp.jsessionid}</SuffixPattern>
+	</appender>
+```
+
+```
+    <logger name="net.shibboleth.idp.authn.impl.ValidateUsernamePasswordAgainstLDAP" level="INFO" additivity="false">
+	<appender-ref ref="IDP_PROCESS" />
+        <appender-ref ref="IDP_SYSLOG"/>
+    </logger>
+```
+
+Add IDP_SYSLOG to root logger
+```
+    <root level="INFO">
+        <appender-ref ref="IDP_PROCESS"/>
+        <appender-ref ref="IDP_SYSLOG"/>
+        <appender-ref ref="IDP_WARN" />
+    </root>
+```
