@@ -1,0 +1,22 @@
+- name: Create Kibana dir
+  file: path=/opt/kibana owner=root group=root mode=0755 state=directory
+
+- name: Create Kibana log dir
+  file: path=/opt/kibana/logs owner=root group=root mode=0755 state=directory
+
+- name: Get Kibana
+  get_url: url={{ kibana_url }} dest=/opt/kibana/kibana.tar.gz
+
+- name: Untar Kibana
+  command: tar -zxf /opt/kibana/kibana.tar.gz -C /opt/kibana/ creates=/opt/kibana/kibana-{{ kibana_version }}
+
+- name: Kibana Permissions
+  command: /bin/chown -R nginx.nginx /opt/kibana
+
+- name: Create kibana init-script
+  template: src=kibana.j2 dest=/etc/init.d/kibana owner=root group=root mode=0755
+  notify:
+   - restart nginx
+
+- name: Enable kibana service
+  service: name=kibana enabled=yes state=started

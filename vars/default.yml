@@ -1,0 +1,5 @@
+elasticsearch_version: "2.0"
+logstash_version: "2.0"
+kibana_version: "4.2.0-linux-x64"
+nginx_repo: "http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm"
+kibana_url: "https://download.elasticsearch.org/kibana/kibana/kibana-{{ kibana_version }}.tar.gz"
