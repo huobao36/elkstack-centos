@@ -11,9 +11,9 @@
 # Description:       Service controller for Kibana 4
 ### END INIT INFO
 
-INSTALLED_DIR=/opt/kibana/kibana-{{ kibana_version }}
+INSTALLED_DIR={{ kibana_dir }}kibana-{{ kibana_version }}
 EXEC_SCRIPT="$INSTALLED_DIR/bin/kibana"
-LOG_DIR=/var/log/kibana
+LOG_DIR={{ kibana_dir }}logs/
 PID_DIR=/var/run
 PID_FILE="$PID_DIR"/kibana.pid
 LOG_FILE="$LOG_DIR"/kibana.log

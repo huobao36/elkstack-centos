@@ -1,6 +1,6 @@
 - name: Create patterns dir
   file:
-    path=/etc/logstash/patterns/
+    path={{ logstash_patterns_dir }}
     owner=root
     group=root
     mode=0755
@@ -9,7 +9,7 @@
 - name: Create patterns config
   template:
     src=grok-pattern.j2
-    dest="/etc/logstash/patterns/grok-pattern"
+    dest="{{ logstash_patterns_dir }}grok-pattern"
     owner=root
     group=root
     mode=0644

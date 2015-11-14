@@ -1,10 +1,10 @@
 input {
   tcp {
-    port => 5000
+    port => {{ logstash_syslog_port_tcp }}
     type => syslog
   }
   udp {
-    port => 5000
+    port =>  {{ logstash_syslog_port_udp }}
     type => syslog
   }
 }
@@ -12,7 +12,7 @@ input {
 filter {
   if [type] == "syslog" {
     grok {
-      patterns_dir => "/etc/logstash/patterns"
+      patterns_dir => "{{ logstash_patterns_dir }}"
       match => { "message" => "<%{NONNEGINT:facility}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{SYSLOGHOST:syslog_hostname} \[%{DATA:syslog_program}\:%{POSINT:syslog_pid}\] %{TIMESTAMP_ISO8601_TZ:time_stamp}\|%{DATA:bindingIn}\|%{DATA:messageIdIn}\|%{URI:serviceProvider}\|%{DATA:profileId}\|%{URI:identityProvider}\|%{DATA:statusMessage}\|%{DATA:bindingOut}\|%{DATA:messageIdOut}\|%{DATA:userId}\|%{DATA:authnContext}\|%{DATA:attributes}\|%{DATA:nameId}\|%{DATA:assertionId}\|%{GREEDYDATA:jsessionId}" }
       add_field => [ "received_at", "%{@timestamp}" ]
       add_field => [ "received_from", "%{host}" ]
@@ -41,6 +41,6 @@ if [status] == "failed" {
 output {
   elasticsearch {
     document_type => "idp-audit"
-    hosts => "127.0.0.1"
+    hosts => "{{ elasticsearch_network_host }}"
   }
 }

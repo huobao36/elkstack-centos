@@ -1,11 +1,11 @@
 - name: Create Kibana dir
   file: 
-   path=/opt/kibana 
+   path={{ kibana_dir }}
    state=directory
 
 - name: Create Kibana log dir
   file: 
-    path=/opt/kibana/logs 
+    path={{ kibana_dir }}logs 
     state=directory
 
 - name: Get Kibana
@@ -16,11 +16,11 @@
 - name: Unarchive kibana
   unarchive:
     src: /tmp/kibana.tar.gz
-    dest: /opt/kibana/
+    dest: {{ kibana_dir }}
     copy: no
 
 - name: Kibana Permissions
-  command: /bin/chown -R nginx.nginx /opt/kibana
+  command: /bin/chown -R nginx.nginx {{ kibana_dir }}
 
 - name: Create kibana init-script
   template:
