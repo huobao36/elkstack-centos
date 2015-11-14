@@ -7,6 +7,6 @@
    - vars/default.yml
 
   roles:
-    - { role: elasticsearch, tags: ["elasticsearch"] }
-    - { role: logstash, tags: ["logstash"] }
-    - { role: nginx-kibana, tags: ["nginx-kibana"] }
+    - { role: elasticsearch }
+    - { role: logstash }
+    - { role: nginx-kibana }

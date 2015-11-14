@@ -1,17 +1,43 @@
 - name: Create patterns dir
-  file: path=/etc/logstash/patterns/ owner=root group=root mode=0755 state=directory
+  file:
+    path=/etc/logstash/patterns/
+    owner=root
+    group=root
+    mode=0755
+    state=directory
 
 - name: Create patterns config
-  template: src=grok-pattern.j2 dest="/etc/logstash/patterns/grok-pattern" owner=root group=root mode=0644
+  template:
+    src=grok-pattern.j2
+    dest="/etc/logstash/patterns/grok-pattern"
+    owner=root
+    group=root
+    mode=0644
 
 - name: Create logstash config
-  template: src=logstash.conf.j2 dest="/etc/logstash/conf.d/logstash.conf" owner=root group=root mode=0644
+  template:
+    src=logstash.conf.j2
+    dest="/etc/logstash/conf.d/logstash.conf"
+    owner=root
+    group=root
+    mode=0644
 
 - name: Set user for logstash init-script
-  lineinfile: dest=/etc/init.d/logstash regexp="^LS_USER=" line="LS_USER=root" state=present
+  lineinfile:
+    dest=/etc/init.d/logstash
+    regexp="^LS_USER="
+    line="LS_USER=root"
+    state=present
 
 - name: Set group for logstash init-script
-  lineinfile: dest=/etc/init.d/logstash regexp="^LS_GROUP=" line="LS_GROUP=root" state=present
+  lineinfile:
+    dest=/etc/init.d/logstash
+    regexp="^LS_GROUP="
+    line="LS_GROUP=root"
+    state=present
 
 - name: Enable Logstash service
-  service: name=logstash enabled=yes state=started
+  service:
+    name=logstash
+    enabled=yes
+    state=started

@@ -1,13 +1,19 @@
 - name: Install Nginx repo for CentOS 6
-  yum: name={{ nginx_repo }} state=installed
+  yum:
+    name={{ nginx_repo6 }}
+    state=installed
   when: ansible_distribution_major_version == "6"
 
 - name: Install Nginx repo for CentOS7
-  yum: name={{ nginx_repo }} state=installed
+  yum:
+    name={{ nginx_repo7 }}
+    state=installed
   when: ansible_distribution_major_version == "7"
 
 - name: Install Nginx
-  yum: name={{ item }} state=latest
+  yum:
+    name={{ item }}
+    state=latest
   with_items:
    - nginx
    - python-passlib
@@ -15,4 +21,7 @@
    - start nginx
 
 - name: Enable nginx service
-  service: name=nginx enabled=yes state=started
+  service:
+    name=nginx
+    enabled=yes
+    state=started
