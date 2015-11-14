@@ -1,5 +1,10 @@
-- name: Install Nginx repo
+- name: Install Nginx repo for CentOS 6
   yum: name={{ nginx_repo }} state=installed
+  when: ansible_distribution_major_version == "6"
+
+- name: Install Nginx repo for CentOS7
+  yum: name={{ nginx_repo }} state=installed
+  when: ansible_distribution_major_version == "7"
 
 - name: Install Nginx
   yum: name={{ item }} state=latest

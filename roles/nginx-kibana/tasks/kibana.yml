@@ -15,8 +15,6 @@
 
 - name: Create kibana init-script
   template: src=kibana.j2 dest=/etc/init.d/kibana owner=root group=root mode=0755
-  notify:
-   - restart nginx
 
 - name: Enable kibana service
   service: name=kibana enabled=yes state=started

@@ -12,5 +12,6 @@
 
 - name: Set group for logstash init-script
   lineinfile: dest=/etc/init.d/logstash regexp="^LS_GROUP=" line="LS_GROUP=root" state=present
-  notify:
-   - restart logstash
+
+- name: Enable Logstash service
+  service: name=logstash enabled=yes state=started

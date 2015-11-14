@@ -1,2 +1,2 @@
 - include: logstash_install.yml
-- include: logstash_conf.yml
+- include: logstash_config.yml
