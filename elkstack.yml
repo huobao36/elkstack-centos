@@ -7,6 +7,7 @@
    - vars/default.yml
 
   roles:
+    - { role: environment }
     - { role: elasticsearch }
     - { role: logstash }
     - { role: nginx-kibana }

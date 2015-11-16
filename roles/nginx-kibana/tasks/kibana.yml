@@ -30,6 +30,14 @@
     group=root
     mode=0755
 
+- name: Create htpasswd file for Kibana
+  template:
+    src=htpasswd.j2
+    dest={{ kibana_dir }}htpasswd
+    owner=nginx
+    group=nginx
+    mode=0600
+
 - name: Enable kibana service
   service: 
     name=kibana

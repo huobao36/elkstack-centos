@@ -36,6 +36,9 @@
     line="LS_GROUP=root"
     state=present
 
+- name: Install Logstash translate plugin
+  shell: /opt/logstash/bin/plugin install logstash-filter-translate
+
 - name: Enable Logstash service
   service:
     name=logstash

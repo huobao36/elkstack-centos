@@ -1,5 +1,5 @@
 # elkstack-centos
-Ansible playbook for Elkstack (Elasticsearch, Logstash, Kibana) - CentOS/RH 6.x
+Ansible playbook for Elkstack (Elasticsearch, Logstash, Kibana) - CentOS/RH 6.x / CentOS/RH 7.x
 >Logstash configuration created for Shibboleth IdP v3 audit logging
 
 Includes:
@@ -20,7 +20,7 @@ Run runansible.sh
 [korteke@server ~]$ sh runansible.sh site
 ```
 
-Tested with CentOS 6.4
+Tested with CentOS 6.4 / 7
 
 ### Shibboleth IdP v3 logging configuration
 
@@ -50,3 +50,8 @@ Add IDP_SYSLOG to root logger
         <appender-ref ref="IDP_WARN" />
     </root>
 ```
+
+### Testing
+Nginx is proxying root to Kibana (http://server_name/)
+user: kibana
+passwd: kibana

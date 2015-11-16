@@ -19,8 +19,8 @@ fi
 
 if [ "local" = "$1" ]
 then
-  ansible-playbook $DEBUG --ask-pass -i hosts $1.yml
+  ansible-playbook $DEBUG --ask-become-pass --become-method=sudo -i hosts $1.yml
 else
-  ansible-playbook $DEBUG --ask-pass -i hosts $1.yml 
+  ansible-playbook $DEBUG --ask-become-pass --become-method=sudo -i hosts $1.yml 
 fi
 
