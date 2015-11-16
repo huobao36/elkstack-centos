@@ -1,11 +1,11 @@
 - name: Create Kibana dir
   file: 
-   path={{ kibana_dir }}
+   path="{{ kibana_dir }}"
    state=directory
 
 - name: Create Kibana log dir
   file: 
-    path={{ kibana_dir }}logs 
+    path="{{ kibana_dir }}logs"
     state=directory
 
 - name: Get Kibana
@@ -16,7 +16,7 @@
 - name: Unarchive kibana
   unarchive:
     src: /tmp/kibana.tar.gz
-    dest: {{ kibana_dir }}
+    dest: "{{ kibana_dir }}"
     copy: no
 
 - name: Kibana Permissions
