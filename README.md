@@ -7,7 +7,7 @@ Includes:
 - Logstash 2.0
 - Kibana 4.2.0
 - Nginx 1.8.0
-- OpenJDK 1.7.0
+- OpenJDK 1.8.0
 
 ### Usage
 Modify hosts-file --> Replace localhost with proper server name. Alter user & port if necessary.
