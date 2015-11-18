@@ -1,3 +1,4 @@
 - include: openjdk.yml
 - include: elasticsearch_install.yml
 - include: elasticsearch_config.yml
+- include: elasticsearch_shield.yml

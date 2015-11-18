@@ -4,7 +4,9 @@ Ansible playbook for Elkstack (Elasticsearch, Logstash, Kibana) - CentOS/RH 6.x 
 
 Includes:
 - Elasticsearch 2.x
+- Elasticsearch - Shield plugin
 - Logstash 2.0
+- Logstash - Translate plugin
 - Kibana 4.2.0
 - Nginx 1.8.0
 - OpenJDK 1.8.0
@@ -55,3 +57,8 @@ Add IDP_SYSLOG to root logger
 Nginx is proxying root to Kibana (http://server_name/)
 user: kibana
 passwd: kibana
+
+### Testing Shield
+Kibana secured with Shield (local users)
+admin:admin1 - Access to all indicies
+johndoe:password1 - Access .kibana & shieldtest indicies

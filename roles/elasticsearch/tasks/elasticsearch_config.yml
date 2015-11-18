@@ -6,6 +6,12 @@
     group=elasticsearch
     mode=0644
 
+- name: Install license plugin for ES
+  shell: /usr/share/elasticsearch/bin/plugin install license
+
+- name: Install Shield plugin for ES
+  shell: /usr/share/elasticsearch/bin/plugin install shield
+
 - name: Enable elasticsearch service
   service:
     name=elasticsearch

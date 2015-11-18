@@ -1,0 +1,28 @@
+- name: Create roles for Shield
+  copy:
+    src=roles.yml
+    dest=/etc/elasticsearch/shield/roles.yml
+
+- name: Create user for Kibana4
+  shell: /usr/share/elasticsearch/bin/shield/esusers useradd {{ kibana_user }} -p {{ kibana_pass }} -r kibana4_server
+
+- name: Create johndoe user for Kibana with password - password1
+  shell: /usr/share/elasticsearch/bin/shield/esusers useradd johndoe -p password1 -r shield_test_role
+
+- name: Create admin user for ES with password - admin1
+  shell: /usr/share/elasticsearch/bin/shield/esusers useradd admin -p admin1 -r admin
+
+- name: Copy bulk data to server
+  copy:
+    src=data.bulk
+    dest=/tmp/data.bulk
+
+- name: Wait until ES is up and runnig
+  command: curl -s -I http://localhost:9200/
+  register: result
+  until: result.stdout.find("401 Unauthorized") != -1
+  retries: 10
+  delay: 30
+
+- name: Insert bulk data to ES
+  shell: curl -XPOST 'admin:admin1@localhost:9200/shieldtest/account/_bulk?pretty' --data-binary @/tmp/data.bulk >> /tmp/bulk.log

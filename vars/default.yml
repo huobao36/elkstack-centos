@@ -9,6 +9,8 @@ logstash_syslog_port_udp: "5000"
 
 kibana_version: "4.2.0-linux-x64"
 kibana_dir: "/opt/kibana/"
+kibana_user: "kibana"
+kibana_pass: "kibana"
 
 nginx_repo6: "http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm"
 nginx_repo7: "http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm"

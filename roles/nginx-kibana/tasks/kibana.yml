@@ -38,6 +38,14 @@
     group=nginx
     mode=0600
 
+- name: Kibana configuration
+  template:
+    src=kibana.yml.j2
+    dest=/opt/kibana/kibana-4.2.0-linux-x64/config/kibana.yml
+    owner=nginx
+    group=nginx
+    mode=0644
+
 - name: Enable kibana service
   service: 
     name=kibana
