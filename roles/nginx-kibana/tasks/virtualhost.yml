@@ -15,3 +15,8 @@
     mode=0644
   notify:
    - restart nginx
+
+- name: Restart nginx service
+  service:
+    name=nginx
+    state=restarted
