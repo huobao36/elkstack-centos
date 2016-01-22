@@ -1,4 +1,5 @@
 # elkstack-centos
+[![Build Status](https://travis-ci.org/korteke/elkstack-centos.svg?branch=master)](https://travis-ci.org/korteke/elkstack-centos)
 Ansible playbook for Elkstack (Elasticsearch, Logstash, Kibana) - CentOS/RH 6.x / CentOS/RH 7.x
 >Logstash configuration created for Shibboleth IdP v3 audit logging
 
