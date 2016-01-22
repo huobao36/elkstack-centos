@@ -1,1 +1,2 @@
+- include: vboxadditions.yml
 - include: setup.yml

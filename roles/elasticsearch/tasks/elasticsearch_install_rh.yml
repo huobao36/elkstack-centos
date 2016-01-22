@@ -4,7 +4,7 @@
 - name: Enable Elasticsearch repository
   template: src=elasticsearch_repo.j2 dest=/etc/yum.repos.d/elasticsearch.repo
 
-- name: Install Elasticsearch 
+- name: Install Elasticsearch CentOS
   yum: name=elasticsearch state=latest
   notify:
    - restart elasticsearch

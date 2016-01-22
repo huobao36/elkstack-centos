@@ -1,3 +1,14 @@
-- include: nginx.yml
+- include: nginx_rh.yml
+  when: ansible_os_family == 'RedHat'
 - include: kibana.yml
-- include: virtualhost.yml
+  when: ansible_os_family == 'RedHat'
+- include: virtualhost_rh.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: nginx_debian.yml
+  when: ansible_os_family == 'Debian'
+- include: kibana.yml
+  when: ansible_os_family == 'Debian'
+- include: virtualhost_debian.yml
+  when: ansible_os_family == 'Debian'
+

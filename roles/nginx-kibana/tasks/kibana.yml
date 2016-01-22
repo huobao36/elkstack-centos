@@ -1,16 +1,16 @@
 - name: Create Kibana dir
-  file: 
+  file:
    path="{{ kibana_dir }}"
    state=directory
 
 - name: Create Kibana log dir
-  file: 
+  file:
     path="{{ kibana_dir }}logs"
     state=directory
 
 - name: Get Kibana
-  get_url: 
-    url={{ kibana_url }} 
+  get_url:
+    url={{ kibana_url }}
     dest=/tmp/kibana.tar.gz
 
 - name: Unarchive kibana
@@ -20,7 +20,7 @@
     copy: no
 
 - name: Kibana Permissions
-  command: /bin/chown -R nginx.nginx {{ kibana_dir }}
+  command: /bin/chown -R www-data.www-data {{ kibana_dir }}
 
 - name: Create kibana init-script
   template:
@@ -29,17 +29,40 @@
     owner=root
     group=root
     mode=0755
+  when: ansible_os_family == 'RedHat'
+
+- name: Create kibana init-script
+  template:
+    src=kibana_debian.j2
+    dest=/etc/init.d/kibana
+    owner=root
+    group=root
+    mode=0755
+  when: ansible_os_family == 'Debian'
 
 - name: Create htpasswd file for Kibana
   template:
     src=htpasswd.j2
     dest={{ kibana_dir }}htpasswd
-    owner=nginx
-    group=nginx
+    owner=www-data
+    group=www-data
     mode=0600
 
-- name: Enable kibana service
-  service: 
+- name: Create htpasswd file for Kibana
+  template:
+    src=kibana_default
+    dest=/etc/default/kibana
+    owner=root
+    group=root
+    mode=0600
+
+- name: Enable kibana service CentOS
+  service:
     name=kibana
     enabled=yes
     state=started
+  when: ansible_os_family == 'RedHat'
+
+- name: Enable kibana service Debian
+  shell: update-rc.d kibana enable
+  when: ansible_os_family == 'Debian'

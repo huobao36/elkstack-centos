@@ -1,3 +1,13 @@
-- include: openjdk.yml
-- include: elasticsearch_install.yml
-- include: elasticsearch_config.yml
+- include: openjdk_rh.yml
+  when: ansible_os_family == 'RedHat'
+- include: elasticsearch_install_rh.yml
+  when: ansible_os_family == 'RedHat'
+- include: elasticsearch_config_rh.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: openjdk_debian.yml
+  when: ansible_os_family == 'Debian'
+- include: elasticsearch_install_debian.yml
+  when: ansible_os_family == 'Debian'
+- include: elasticsearch_config_debian.yml
+  when: ansible_os_family == 'Debian'

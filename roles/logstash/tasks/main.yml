@@ -1,2 +1,11 @@
-- include: logstash_install.yml
-- include: logstash_config.yml
+- include: logstash_install_rh.yml
+  when: ansible_os_family == 'RedHat'
+- include: logstash_config_rh.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: logstash_install_debian.yml
+  when: ansible_os_family == 'Debian'
+- include: logstash_config_debian.yml
+  when: ansible_os_family == 'Debian'
+
+

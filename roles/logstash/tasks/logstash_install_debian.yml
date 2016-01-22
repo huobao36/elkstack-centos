@@ -1,0 +1,8 @@
+- name: Add Logstash repo key
+  shell: wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+- name: Enable Elasticsearch repository
+  shell: echo 'deb http://packages.elasticsearch.org/logstash/2.1/debian stable main' | sudo tee /etc/apt/sources.list.d/logstash.list
+
+- name: Install Logstash
+  apt: name=logstash state=latest update_cache=yes

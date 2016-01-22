@@ -1,0 +1,35 @@
+---
+    - name: Find Virtualbox Version
+      sudo: no
+      local_action: command roles/environment/files/vboxversion.sh
+      register: hostV
+
+    - name: Install needed shell scripts
+      copy: src=guestversion.sh dest=/usr/local/bin/guestversion.sh mode=0755
+
+    - name: Find Guest Additions Version
+      shell: guestversion.sh
+      register: guestV
+
+    - name: Download Guest Additions Installer (when required)
+      get_url: dest=/opt url=http://download.virtualbox.org/virtualbox/{{hostV.stdout}}/VBoxGuestAdditions_{{hostV.stdout}}.iso 
+      when: hostV.stdout != guestV.stdout
+
+    - name: Mount Guest Additions .iso (when required)
+      shell: mount /opt/VBoxGuestAdditions_{{hostV.stdout}}.iso -o loop /mnt creates=/mnt/VBoxLinuxAdditions.run
+      when: hostV.stdout != guestV.stdout
+
+    - name: Install Guest Additions (when required)
+      shell: /mnt/VBoxLinuxAdditions.run --nox11 -- --force
+      when: hostV.stdout != guestV.stdout
+      ignore_errors: yes  # Need to ignore errors here because no windowing system is installed on server image.  No way to override. 
+
+    - name: Halting the VM since Guest Additions Updated
+      local_action: command vagrant halt
+      sudo: no
+      when: hostV.stdout != guestV.stdout
+
+    - name: Restarting the VM without provisioning
+      local_action: command vagrant up --no-provision
+      sudo: no
+      when: hostV.stdout != guestV.stdout

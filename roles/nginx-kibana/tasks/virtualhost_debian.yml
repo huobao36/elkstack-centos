@@ -1,0 +1,22 @@
+- name: Delete default nginx configurations
+  file:
+    path=/etc/nginx/sites-enabled/{{ item }}
+    state=absent
+  with_items:
+   - default.conf
+   - example_ssl.conf
+
+- name: Create nginx virtual host for Kibana
+  template:
+    src=kibana.conf.j2
+    dest=/etc/nginx/sites-enabled/kibana.conf
+    owner=root
+    group=root
+    mode=0644
+  notify:
+   - restart nginx
+
+- name: Restart nginx service
+  service:
+    name=nginx
+    state=restarted
