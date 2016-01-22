@@ -11,7 +11,7 @@
   register: ls_command
 
 - name: Show debug
-  debug: ls_command
+  debug: var=ls_command
 
 - name: Enable elasticsearch service
   service:
