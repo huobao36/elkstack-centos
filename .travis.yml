@@ -22,7 +22,7 @@ before_install:
   # Pull containers
   - 'sudo docker pull ${distribution}:${version}'
   # Customize container
-  - 'sudo docker build --rm=true --file=tests/Dockerfile.${distribution}-${version} --tag=${distribution}-${version}:ansible tests'
+  - 'sudo docker build --rm=true --file=travis/Dockerfile.${distribution}-${version} --tag=${distribution}-${version}:ansible travis'
   - gem install selenium-webdriver
 
 script:
