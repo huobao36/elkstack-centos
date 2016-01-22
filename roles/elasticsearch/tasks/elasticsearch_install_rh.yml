@@ -6,5 +6,9 @@
 
 - name: Install Elasticsearch CentOS
   yum: name=elasticsearch state=latest
+  register: ela_install
   notify:
    - restart elasticsearch
+
+- name: Debug elastic install
+  debug: var=ela_install
