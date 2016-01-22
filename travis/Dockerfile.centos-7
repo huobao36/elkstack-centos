@@ -22,6 +22,7 @@ RUN sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers
 
 # Install Ansible inventory file
 ENV JAVA_HOME /usr/lib/jvm/jre-1.8.0-openjdk.x86_64
+ENV PATH $PATH:$JAVA_HOME/bin
 RUN echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 
 VOLUME ["/sys/fs/cgroup"]

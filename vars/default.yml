@@ -1,4 +1,4 @@
-disable_selinux: "False"
+disable_selinux: "True"
 elasticsearch_version: "2.1"
 elasticsearch_network_host: "127.0.0.1"
 

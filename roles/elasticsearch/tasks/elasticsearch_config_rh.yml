@@ -6,6 +6,13 @@
     group=elasticsearch
     mode=0644
 
+- name: Debugging docker
+  shell: ls -lat /etc/init.d/
+  register: ls_command
+
+- name: Show debug
+  debug: ls_command
+
 - name: Enable elasticsearch service
   service:
     name=elasticsearch
